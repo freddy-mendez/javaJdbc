@@ -90,9 +90,6 @@ public class Cliente {
     public void setCategoria(int categoria) {
         this.categoria = categoria;
     }
-    
-    
-    
 
     @Override
     public String toString() {
