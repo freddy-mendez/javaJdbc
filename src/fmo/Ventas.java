@@ -7,7 +7,7 @@ package fmo;
 import fmo.dao.ClienteDAO;
 import fmo.db.ConexionDB;
 import java.sql.*;
-import java.util.ArrayList;
+import java.util.*;
 import javax.swing.JOptionPane;
 
 /**
@@ -24,15 +24,47 @@ public class Ventas {
         
         //Connection con = ConexionDB.getInstance();
         
+        Scanner tc = new Scanner(System.in);
+        
         ClienteDAO cDAO = new ClienteDAO();
-        ArrayList<Cliente> data = cDAO.getClientes();
-        for(Cliente c: data) {
+        //Cliente luis = new Cliente(2, "Mauricio", "Carvajal", "Vera", "Aqui", 1);
+        //cDAO.insert(luis);
+        
+        Cliente c = cDAO.getCliente(18);
+        c.setCiudad("Bga");
+        c.setCategoria(100);
+        cDAO.update(c, 18);
+        
+        
+        
+//        System.out.println("Digite el codigo del cliente a eliminar");
+//        int id = tc.nextInt();
+//        if (cDAO.delete(id)) {
+//            JOptionPane.showMessageDialog(null, 
+//                    "Cliente Eliminado!!", 
+//                    "Delete Cliente", 
+//                    JOptionPane.ERROR_MESSAGE);
+//        }
+        /*ArrayList<Cliente> data = cDAO.getClientes();
+        for (Cliente c: data) {
             System.out.println(c);
-        }
+        }*/
+        
+        /*Cliente c = cDAO.getCliente(14);
+        System.out.println((c==null?"No existe el cliente":c));*/
+        
+        /*
+        Cliente luis = new Cliente(2, "Mauricio", "Carvajal", "Vera", "Aqui", 1);
+        //cDAO.insert(luis);
+        if (cDAO.insert(luis)) {
+            JOptionPane.showMessageDialog(null, 
+                    "Cliente Insertado con Exito!!", 
+                    "Insert Cliente", 
+                    JOptionPane.INFORMATION_MESSAGE);
+        }*/
         
         
-        /*Cliente luis = new Cliente(2, "Mauricio", "Carvajal", "Vera", "Aqui", 1);
-        
+        /*
         ClienteDAO cDAO = new ClienteDAO();
         if (cDAO.insert(luis)) {
             JOptionPane.showMessageDialog(null, 
