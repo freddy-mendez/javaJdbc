@@ -27,14 +27,14 @@ public class Ventas {
         
         Scanner tc = new Scanner(System.in);
         
-        ClienteDAO cDAO = new ClienteDAO();
+        //ClienteDAO cDAO = new ClienteDAO();
         //Cliente luis = new Cliente(2, "Mauricio", "Carvajal", "Vera", "Aqui", 1);
         //cDAO.insert(luis);
         
-        Cliente c = cDAO.getCliente(18);
+        /*Cliente c = cDAO.getCliente(18);
         c.setCiudad("Bga");
         c.setCategoria(100);
-        cDAO.update(c, 18);
+        cDAO.update(c, 18);*/
         
         
         
