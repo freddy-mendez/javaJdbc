@@ -1,6 +1,6 @@
 package fmo.dao;
 
-import fmo.Cliente;
+import fmo.model.Cliente;
 import fmo.db.ConexionDB;
 import java.sql.*;
 import java.util.ArrayList;

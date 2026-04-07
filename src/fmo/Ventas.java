@@ -4,6 +4,7 @@
  */
 package fmo;
 
+import fmo.model.Cliente;
 import fmo.dao.ClienteDAO;
 import fmo.db.ConexionDB;
 import java.sql.*;
