@@ -4,8 +4,11 @@
  */
 package fmo;
 
+import fmo.dao.ClienteDAO;
 import fmo.db.ConexionDB;
 import java.sql.*;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,10 +22,27 @@ public class Ventas {
     public static void main(String[] args) {
         // TODO code application logic here
         
-        Connection con = ConexionDB.getInstance();
+        //Connection con = ConexionDB.getInstance();
+        
+        ClienteDAO cDAO = new ClienteDAO();
+        ArrayList<Cliente> data = cDAO.getClientes();
+        for(Cliente c: data) {
+            System.out.println(c);
+        }
         
         
-        /*
+        /*Cliente luis = new Cliente(2, "Mauricio", "Carvajal", "Vera", "Aqui", 1);
+        
+        ClienteDAO cDAO = new ClienteDAO();
+        if (cDAO.insert(luis)) {
+            JOptionPane.showMessageDialog(null, 
+                    "Cliente Insertado con Exito!!", 
+                    "Insert Cliente", 
+                    JOptionPane.INFORMATION_MESSAGE);
+        }
+        
+        
+        
         Cliente luis = new Cliente(1, "Luis", "Figueroa");
         Cliente mauricio = new Cliente(2, "Mauricio", "Carvajal", "Vera", "Aqui", 1);
         Cliente daniel = new Cliente(3, "Daniel", "Celis", null, "Giron", 0);
