@@ -1,15 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package fmo;
 
-import fmo.model.Cliente;
 import fmo.dao.ClienteDAO;
-import fmo.db.ConexionDB;
-import java.sql.*;
-import java.util.*;
-import javax.swing.JOptionPane;
+import fmo.model.Cliente;
+import java.util.ArrayList;
+
 
 /**
  *
@@ -21,11 +15,14 @@ public class Ventas {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
+        menuPrincipal();
+        
         // TODO code application logic here
         
         //Connection con = ConexionDB.getInstance();
         
-        Scanner tc = new Scanner(System.in);
+        //Scanner tc = new Scanner(System.in);
         
         //ClienteDAO cDAO = new ClienteDAO();
         //Cliente luis = new Cliente(2, "Mauricio", "Carvajal", "Vera", "Aqui", 1);
@@ -109,6 +106,124 @@ public class Ventas {
         }
         */
         
+        
+        
+    }
+    
+    private static void menuPrincipal() {
+        boolean salir = false;
+        do {
+            IO.println("********************MENU*******************");
+            IO.println("*          1. Gestión de Clientes         *");
+            IO.println("*          2. Gestión de Comerciales      *");
+            IO.println("*          3. Salir                       *");
+            IO.println("*******************************************");
+            String rs = IO.readln("Digite su opción:");
+            switch (rs) {
+                case "1":
+                    gestionClientes();
+                    break;
+                case "2":
+                    IO.println("Gestión Comerciales");
+                    break;
+                case "3":
+                    salir=true;
+                    break;
+                default:
+                    IO.println("Opción no valida, Intente nuevamente");
+            }
+        } while (!salir);
+    }
+
+    private static void gestionClientes() {
+        boolean gestion=true;
+        ClienteDAO cDAO = new ClienteDAO();
+        do {
+            IO.println("********************MENU*******************");
+            IO.println("*          1. Listar Clientes             *");
+            IO.println("*          2. Agregar Cliente             *");
+            IO.println("*          3. Eliminar Cliente            *");
+            IO.println("*          4. Modificar Cliente           *");
+            IO.println("*          5. Volver al menu pricipal     *");
+            IO.println("*******************************************");
+            String rs = IO.readln("Digite su opción:");
+            switch (rs) {
+                case "1":
+                    ArrayList<Cliente> clientes = cDAO.getClientes();
+                    for (Cliente c:clientes) {
+                        IO.println(c);
+                    }
+                    break;
+                case "2":
+                    String nombre = IO.readln("Digite el nombre del Cliente");
+                    String apellido1 = IO.readln("Digite el primer apellido del Cliente");
+                    String apellido2=null;
+                    String result = IO.readln("Tiene segundo apellido? [Si o No]").
+                            toLowerCase();
+                    if (result.equals("si")) {
+                        apellido2=IO.readln("Digite el segundo apellido");
+                    }
+                    String ciudad=null;
+                    result = IO.readln("Tiene Ciudad? [Si o No]").
+                            toLowerCase();
+                    if (result.equals("si")) {
+                        ciudad=IO.readln("Digite la ciudad");
+                    }
+                    int categoria=0;
+                    result = IO.readln("Tiene categoria? [Si o No]").
+                            toLowerCase();
+                    if (result.equals("si")) {
+                        categoria=Integer.parseInt(IO.readln("Digite la categoria"));
+                    }
+                    Cliente c = new Cliente(nombre, apellido1, apellido2, ciudad, categoria);
+                    cDAO.insert(c);
+                    break;
+                case "3":
+                    String id = IO.readln("Digite el id del Cliente a Eliminar");
+                    cDAO.delete(Integer.parseInt(id));
+                    break;
+                case "4":
+                    String id1 = IO.readln("Digite el id del Cliente");
+                    Cliente c1 = cDAO.getCliente(Integer.parseInt(id1));
+                    IO.println("Nombre Actual="+c1.getNombre());
+                    String resp = IO.readln("Quiere modificar el nombre? [Si o No]")
+                            .toLowerCase();
+                    if (resp.equals("si")) {
+                        c1.setNombre(IO.readln("Digite el nuevo nombre"));
+                    }
+                    IO.println("Apellido 1 Actual="+c1.getApellido1());
+                    resp = IO.readln("Quiere modificar el primer apellido? [Si o No]")
+                            .toLowerCase();
+                    if (resp.equals("si")) {
+                        c1.setApellido1(IO.readln("Digite el nuevo primer apellido"));
+                    }
+                    IO.println("Apellido 2 Actual="+c1.getApellido2());
+                    resp = IO.readln("Quiere modificar el segundo apellido? [Si o No]")
+                            .toLowerCase();
+                    if (resp.equals("si")) {
+                        c1.setApellido2(IO.readln("Digite el nuevo segundo apellido"));
+                    }
+                    IO.println("Ciudad Actual="+c1.getCiudad());
+                    resp = IO.readln("Quiere modificar la ciudad? [Si o No]")
+                            .toLowerCase();
+                    if (resp.equals("si")) {
+                        c1.setCiudad(IO.readln("Digite la nueva ciudad"));
+                    }
+                    IO.println("Categoria Actual="+c1.getCategoria());
+                    resp = IO.readln("Quiere modificar la categoria? [Si o No]")
+                            .toLowerCase();
+                    if (resp.equals("si")) {
+                        c1.setCategoria(Integer.parseInt(IO.readln("Digite la nueva ciudad")));
+                    }
+                    cDAO.update(c1, Integer.parseInt(id1));
+                    break;
+                case "5":
+                    gestion=false;
+                    break;
+                default:
+                    throw new AssertionError();
+            }
+        } while(gestion);
     }
     
 }
