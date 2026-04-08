@@ -2,6 +2,7 @@ package fmo;
 
 import fmo.dao.ClienteDAO;
 import fmo.model.Cliente;
+import fmo.view.Menu;
 import java.util.ArrayList;
 
 
@@ -16,7 +17,8 @@ public class Ventas {
      */
     public static void main(String[] args) {
         
-        menuPrincipal();
+        //menuPrincipal();
+        java.awt.EventQueue.invokeLater(() -> new Menu().setVisible(true));
         
         // TODO code application logic here
         
